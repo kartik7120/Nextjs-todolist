@@ -1,4 +1,4 @@
-import { Container, Loading } from "@nextui-org/react";
+import { Container, Loading, Text } from "@nextui-org/react";
 import useSWR from "swr";
 import ListCard from '../components/List';
 import { ListInterface } from "../models/List";
@@ -29,6 +29,7 @@ export default function BottomList() {
     }
 
     return <Container wrap="wrap">
+        <Text h2 size="$5xl">Todo Lists</Text>
         <div className={styles.bottom}>
             {data && data.map((list) => {
                 return <ListCard key={list.id!} body={list.description} header={list.title} />
