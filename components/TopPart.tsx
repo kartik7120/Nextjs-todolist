@@ -1,4 +1,4 @@
-import { Button, FormElement, Text, Textarea } from "@nextui-org/react";
+import { Button, Container, FormElement, Text, Textarea } from "@nextui-org/react";
 import { Modal, Input } from "@nextui-org/react";
 import React from "react";
 import { BsCardList } from "react-icons/bs";
@@ -67,7 +67,9 @@ export default function TopPart() {
                 </Modal.Body>
             </Modal>
         </form>
-        <Text h1 weight="bold">Create your Todo List</Text>
-        <Button size="lg" onClick={handler}>Create Todo</Button>
+        <Container wrap="wrap" direction="column" justify="space-between" alignItems="center" responsive>
+            <Text h1 weight="bold">Create your Todo List</Text>
+            <Button size="lg" onClick={handler}>Create Todo</Button>
+        </Container>
     </>
 }

@@ -1,11 +1,12 @@
 import { Container, Loading, Text } from "@nextui-org/react";
+import Link from "next/link";
 import useSWR from "swr";
 import ListCard from '../components/List';
 import { ListInterface } from "../models/List";
 import styles from "../styles/bottom.module.css";
 
 interface NewListInterface extends ListInterface {
-    id: number
+    _id: number
 }
 
 const fetchLists = async () => {
@@ -32,7 +33,7 @@ export default function BottomList() {
         <Text h2 size="$5xl">Todo Lists</Text>
         <div className={styles.bottom}>
             {data && data.map((list) => {
-                return <ListCard key={list.id!} body={list.description} header={list.title} />
+                return <ListCard id={list._id} body={list.description} key={list._id!} header={list.title} />
             })}
         </div>
     </Container>
