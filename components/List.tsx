@@ -1,5 +1,6 @@
-import { Card } from "@nextui-org/react";
+import { Button, Card, Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/router";
+import { BsTrash } from "react-icons/bs";
 
 interface Props {
     header: string | undefined,
@@ -21,5 +22,10 @@ export default function ListCard(props: Props) {
         <Card.Body>
             {props.body}
         </Card.Body>
+        <Card.Footer>
+            <Tooltip content="Delete List">
+                <Button type="button" color="error" size="md" icon={<BsTrash />} />
+            </Tooltip>
+        </Card.Footer>
     </Card>
 }
