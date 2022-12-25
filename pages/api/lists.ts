@@ -34,8 +34,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
             return res.status(200).json("List Created Successfully");
         } catch (error) {
-            console.log(error);
             return res.status(500).json("Error occured while creating a list , please try again");
+        }
+    }
+
+    if (req.method === "DELETE") {
+        try {
+
+            const { id } = req.body;
+
+            if (id === null || id === undefined) {
+                return res.status(400).json("Please provide the id of the list");
+            }
+
+            const lists = await List.findByIdAndDelete(id, {
+                new: true
+            });
+
+            return res.status(200).json(lists);
+
+        } catch (error) {
+           return res.status(500).json("Error occured while deleting the lists");
         }
     }
 }
