@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-interface ListInterface {
-    title: String,
+export interface ListInterface {
+    title: string,
     items?: any[],
     description?: string
 }

@@ -4,8 +4,11 @@ import { Inter } from '@next/font/google'
 import { Button, Container, Row, Text, useTheme } from '@nextui-org/react';
 import { useTheme as useNextTheme } from 'next-themes'
 import TopPart from '../components/TopPart';
+import { Card } from '@nextui-org/react';
+import ListCard from '../components/List';
+import BottomList from '../components/BottomList';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { type, isDark } = useTheme();
@@ -23,6 +26,7 @@ export default function Home() {
           <Row align='center' justify='center'>
             <TopPart />
           </Row>
+          <BottomList />
         </Container>
       </main>
     </>
