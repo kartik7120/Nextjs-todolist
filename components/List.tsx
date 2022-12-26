@@ -68,7 +68,7 @@ export default function ListCard(props: Props) {
 
         <Card css={{ mw: "300px", margin: "$5" }} variant='bordered' isHoverable isPressable onPress={
             () => {
-                router.push(`/${props.id}`)
+                router.push(`/lists/${props.id}`)
             }
         }>
             <Card.Header>

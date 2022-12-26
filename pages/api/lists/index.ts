@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import connectDB from "../../lib/mongoose";
-import List from "../../models/List";
+import connectDB from "../../../lib/mongoose";
+import List from "../../../models/List";
 
 interface CreateList {
     title: string,

@@ -30,7 +30,7 @@ export default function BottomList() {
     }
 
     return <Container wrap="wrap">
-        <Text h2 size="$5xl">Todo Lists</Text>
+        <Text id="Lists" h2 size="$5xl">Todo Lists</Text>
         <div className={styles.bottom}>
             {data && data.map((list) => {
                 return <ListCard id={list._id} body={list.description} key={list._id!} header={list.title} />

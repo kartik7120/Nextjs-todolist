@@ -22,10 +22,8 @@ export default function Nav({ children }: { children?: React.ReactNode }) {
       <Text h2 size="$5xl">TodoList</Text>
     </Navbar.Brand>
     <Navbar.Content enableCursorHighlight activeColor="secondary" variant="highlight-rounded">
-      <Navbar.Link isActive href="#">Features</Navbar.Link>
-      <Navbar.Link href="#">Customers</Navbar.Link>
-      <Navbar.Link href="#">Pricing</Navbar.Link>
-      <Navbar.Link href="#">Company</Navbar.Link>
+      <Navbar.Link isActive href="/">Home</Navbar.Link>
+      <Navbar.Link href="#Lists">Lists</Navbar.Link>
     </Navbar.Content>
     <Navbar.Content>
       <Button color="gradient" onClick={() => {
