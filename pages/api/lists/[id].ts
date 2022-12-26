@@ -38,5 +38,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(500).json("Error occured while creating a todo item");
         }
     }
+
+    if (req.method === "DELETE") {
+        try {
+            const { itemId } = req.body;
+            const lists = await List.findByIdAndUpdate(id, {
+                $pull: {
+                    items: itemId
+                }
+            }, { new: true }).populate("items");
+
+            await Item.findByIdAndDelete(itemId);
+
+            return res.status(200).json(lists);
+        } catch (error) {
+            return res.status(500).json("Error occured while deleting a todo item");
+        }
+    }
 }
 export default handler;
