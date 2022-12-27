@@ -11,11 +11,14 @@ import styles from "../../../styles/list.module.css";
 import React, { useEffect, useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import Head from "next/head";
+
 interface Props {
     data: ListInterface,
     title: string,
     listId: string
 }
+
+export type Order = "Completed" | "Incomplete" | "all";
 
 async function MarkList(key: string, { arg }: { arg: any }) {
     try {
@@ -71,6 +74,7 @@ async function deleteItem(key: string, { arg }: { arg: any }) {
 export default function SingleList() {
     const { query, isReady } = useRouter();
     const [shouldFetch, setShouldFetch] = useState(false);
+    const [order, setOrder] = useState<Order>("all");
 
     const { data, error, isMutating: loading, trigger: tri } = useSWRMutation<ListInterface>(`/api/lists/${query.id}`, fetchList);
     const { trigger: tri2, isMutating: mut } = useSWRMutation<ListInterface>(`/api/lists/${query.id}`, MarkList);
@@ -105,12 +109,23 @@ export default function SingleList() {
             <title>{data?.title} Todo list</title>
         </Head>
         <Container responsive>
-            <ListHeader id={data && data._id} title={data && data.title || "Untitled"} />
+            <ListHeader setState={setOrder} id={data && data._id} title={data && data.title || "Untitled"} />
             <Container>
                 <Text size="$lg" weight="medium">{data && data.description || "No Description available for this Todo"}</Text>
             </Container>
             <div className={styles.wrapper}>
                 {data && data.items?.map((item, index: number) => {
+                    if (order === "Completed") {
+                        if (item.checked === false) {
+                            return null
+                        }
+                    }
+                    else
+                        if (order === "Incomplete") {
+                            if (item.checked === true) {
+                                return null;
+                            }
+                        }
                     return <>
                         <Modal closeButton open={visible} onClose={closeHandler}>
                             <Modal.Header>
@@ -131,7 +146,6 @@ export default function SingleList() {
                             </Checkbox>
                             <div className={styles.wrapper3}>
                                 <Tooltip placement="left" color="error" content="Delete Todo Item">
-
                                     <Button color="error" onClick={() => {
                                         trigger({ id: query.id, itemId: item._id })
                                     }}>{isMutating ? <Loading /> : <BsTrash />}</Button>

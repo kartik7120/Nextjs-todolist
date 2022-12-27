@@ -5,10 +5,12 @@ import { AiOutlinePlus } from "react-icons/ai";
 import React from "react";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/router";
+import { Order } from "../pages/lists/[id]";
 
 interface Props {
     title: string | undefined,
-    id: string | undefined
+    id: string | undefined,
+    setState: React.Dispatch<React.SetStateAction<Order>>
 }
 
 async function createTodo(key: string, { arg }: { arg: any }) {
@@ -85,8 +87,9 @@ export default function ListHeader(props: Props) {
                         <Button color="default" ><SlOptions /></Button>
                     </Popover.Trigger>
                     <Popover.Content>
-                        <Button color="primary">Sort by Completed</Button>
-                        <Button color="primary">Sort by Incomplete</Button>
+                        <Button color="primary" onClick={() => props.setState("Completed")}>Sort by Completed</Button>
+                        <Button color="primary" onClick={() => props.setState("Incomplete")}>Sort by Incomplete</Button>
+                        <Button color="primary" onClick={() => props.setState("all")}>Show All</Button>
                     </Popover.Content>
                 </Popover>
             </Navbar.Content>
