@@ -1,4 +1,4 @@
-import { Button, Checkbox, Col, Container, Loading, Modal, Row, Text } from "@nextui-org/react";
+import { Button, Checkbox, Col, Container, Loading, Modal, Row, Text, Tooltip } from "@nextui-org/react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
@@ -130,10 +130,15 @@ export default function SingleList() {
                                 <Text size="$3xl">{item.title}</Text>
                             </Checkbox>
                             <div className={styles.wrapper3}>
-                                <Button color="error" onClick={() => {
-                                    trigger({ id: query.id, itemId: item._id })
-                                }}>{isMutating ? <Loading /> : <BsTrash />}</Button>
-                                <Button color="primary" onClick={handler}><AiOutlineInfoCircle /></Button>
+                                <Tooltip placement="left" color="error" content="Delete Todo Item">
+
+                                    <Button color="error" onClick={() => {
+                                        trigger({ id: query.id, itemId: item._id })
+                                    }}>{isMutating ? <Loading /> : <BsTrash />}</Button>
+                                </Tooltip>
+                                <Tooltip placement="top" color="secondary" content="More Info on Todo">
+                                    <Button color="primary" onClick={handler}><AiOutlineInfoCircle /></Button>
+                                </Tooltip>
                             </div>
                         </div>
                     </>
