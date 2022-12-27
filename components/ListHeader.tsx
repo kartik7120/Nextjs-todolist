@@ -4,6 +4,7 @@ import { Popover } from '@nextui-org/react';
 import { AiOutlinePlus } from "react-icons/ai";
 import React from "react";
 import useSWRMutation from "swr/mutation";
+import { useRouter } from "next/router";
 
 interface Props {
     title: string | undefined,
@@ -36,10 +37,18 @@ async function createTodo(key: string, { arg }: { arg: any }) {
 export default function ListHeader(props: Props) {
 
     const [visible, setVisible] = React.useState(false);
-    const { data, isMutating, trigger } = useSWRMutation(`/api/lists/${props.id}`, createTodo);
-    const handler = () => setVisible(true);
+    const router = useRouter();
     const [todo, setTodo] = React.useState("");
     const [desc, setDesc] = React.useState("");
+    const { data, isMutating, trigger } = useSWRMutation(`/api/lists/${props.id}`, createTodo, {
+        revalidate: true,
+        populateCache: true,
+        onSuccess(data, key, config) {
+            setVisible(false);
+            router.reload();
+        }
+    });
+    const handler = () => setVisible(true);
 
     const closeHandler = () => {
         setVisible(false);

@@ -18,13 +18,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === "POST") {
         try {
             const { title, description } = req.body;
-            console.log(`title = ${title} and description = ${description}`);
             const item = new Item({
                 title,
                 description,
             });
-
-            console.log(item);
 
             await item.save();
 
