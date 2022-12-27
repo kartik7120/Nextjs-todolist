@@ -72,7 +72,6 @@ export default function SingleList() {
     const { query, isReady } = useRouter();
     const [shouldFetch, setShouldFetch] = useState(false);
 
-    // const { data, error, isLoading } = useSWR<ListInterface>(isReady ? `/api/lists/${query.id}` : null, fetchList);
     const { data, error, isMutating: loading, trigger: tri } = useSWRMutation<ListInterface>(`/api/lists/${query.id}`, fetchList);
     const { trigger: tri2, isMutating: mut } = useSWRMutation<ListInterface>(`/api/lists/${query.id}`, MarkList);
     useEffect(() => {
@@ -135,31 +134,3 @@ export default function SingleList() {
         </div>
     </Container>
 }
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//     const { params } = context;
-
-//     if (params && (params.id === null || params.id === undefined)) {
-//         return {
-//             notFound: true
-//         }
-//     }
-
-//     try {
-//         const query = await List.findById(params && params.id ? params.id : undefined).populate("items").lean();
-//         const result = JSON.parse(JSON.stringify(query));
-//         return {
-//             props: {
-//                 data: result,
-//                 title: result.title,
-//                 listId: result._id
-//             }
-//         }
-//     } catch (error) {
-//         return {
-//             props: {
-//                 data: new Array(0)
-//             }
-//         }
-//     }
-// } 
