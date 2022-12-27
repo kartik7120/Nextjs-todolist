@@ -8,7 +8,13 @@
 .wrapper2 {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
+}
+
+.wrapper3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }

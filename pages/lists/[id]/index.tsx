@@ -9,8 +9,8 @@ import { BsTrash } from "react-icons/bs";
 import useSWRMutation from "swr/mutation";
 import styles from "../../../styles/list.module.css";
 import React, { useEffect, useState } from "react";
-import { Tiro_Gurmukhi } from "@next/font/google";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import Head from "next/head";
 interface Props {
     data: ListInterface,
     title: string,
@@ -99,38 +99,46 @@ export default function SingleList() {
     }
 
 
-    return <Container responsive>
-        <ListHeader id={data && data._id} title={data && data.title || "Untitled"} />
-        <Container>
-            <Text size="$lg" weight="medium">{data && data.description || "No Description available for this Todo"}</Text>
-        </Container>
-        <div className={styles.wrapper}>
-            {data && data.items?.map((item, index: number) => {
-                return <>
-                    <Modal closeButton open={visible} onClose={closeHandler}>
-                        <Modal.Header>
-                            <Text size="$2xl" h2>{item.title}</Text>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Text size="$xl">
-                                Description of todo:
-                            </Text>
-                            <Text>{item.description}</Text>
-                        </Modal.Body>
-                    </Modal>
-                    <Checkbox isDisabled={mut} onClick={() => {
-                        tri2({ itemId: item._id, state: item.checked });
-                    }} lineThrough defaultSelected={item.checked} value={item.title + ',' + item._id} key={item._id}>
+    return <>
+        <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{data?.title} Todo list</title>
+        </Head>
+        <Container responsive>
+            <ListHeader id={data && data._id} title={data && data.title || "Untitled"} />
+            <Container>
+                <Text size="$lg" weight="medium">{data && data.description || "No Description available for this Todo"}</Text>
+            </Container>
+            <div className={styles.wrapper}>
+                {data && data.items?.map((item, index: number) => {
+                    return <>
+                        <Modal closeButton open={visible} onClose={closeHandler}>
+                            <Modal.Header>
+                                <Text size="$2xl" h2>{item.title}</Text>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Text size="$xl">
+                                    Description of todo:
+                                </Text>
+                                <Text>{item.description}</Text>
+                            </Modal.Body>
+                        </Modal>
                         <div className={styles.wrapper2}>
-                            <Text size="$3xl">{item.title}</Text>
-                            <Button color="error" onClick={() => {
-                                trigger({ id: query.id, itemId: item._id })
-                            }}>{isMutating ? <Loading /> : <BsTrash />}</Button>
-                            <Button color="primary" onClick={handler}><AiOutlineInfoCircle /></Button>
+                            <Checkbox isDisabled={mut} onClick={() => {
+                                tri2({ itemId: item._id, state: item.checked });
+                            }} lineThrough defaultSelected={item.checked} value={item.title + ',' + item._id} key={item._id}>
+                                <Text size="$3xl">{item.title}</Text>
+                            </Checkbox>
+                            <div className={styles.wrapper3}>
+                                <Button color="error" onClick={() => {
+                                    trigger({ id: query.id, itemId: item._id })
+                                }}>{isMutating ? <Loading /> : <BsTrash />}</Button>
+                                <Button color="primary" onClick={handler}><AiOutlineInfoCircle /></Button>
+                            </div>
                         </div>
-                    </Checkbox>
-                </>
-            })}
-        </div>
-    </Container>
+                    </>
+                })}
+            </div>
+        </Container>
+    </>
 }
