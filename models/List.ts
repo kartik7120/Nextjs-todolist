@@ -5,6 +5,7 @@ export interface ListInterface {
     title: string,
     items?: ListItem[],
     description?: string,
+    _id: string
 }
 
 const ListSchema = new mongoose.Schema<ListInterface>({

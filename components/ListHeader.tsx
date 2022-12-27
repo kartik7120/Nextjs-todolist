@@ -6,8 +6,8 @@ import React from "react";
 import useSWRMutation from "swr/mutation";
 
 interface Props {
-    title: string
-    id: string
+    title: string | undefined,
+    id: string | undefined
 }
 
 async function createTodo(key: string, { arg }: { arg: any }) {

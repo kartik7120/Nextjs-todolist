@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method === "GET") {
         try {
-            const lists = await List.find({ _id: id }).populate("items").exec();
+            const lists = await List.findById(id).populate("items").exec();
             return res.status(200).json(lists);
         } catch (error) {
             return res.status(500).json("Some errors occured while retreving of items of list");
@@ -53,6 +53,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).json(lists);
         } catch (error) {
             return res.status(500).json("Error occured while deleting a todo item");
+        }
+    }
+
+    if (req.method === "PUT") {
+        try {
+            const { itemId ,state} = req.body;
+
+            const item = await Item.findByIdAndUpdate(itemId, {
+                $set: { checked: !state }
+            });
+
+            const lists = await List.findById(id).populate("items");
+            return res.status(200).json(lists);
+
+        } catch (error) {
+            return res.status(500).json("Error occured while changing the status of todo item");
         }
     }
 }
