@@ -15,7 +15,6 @@ interface Props {
 
 async function createTodo(key: string, { arg }: { arg: any }) {
     try {
-        console.log(arg);
         const query = await fetch(`/api/lists/${arg.id}`, {
             method: "POST",
             headers: {

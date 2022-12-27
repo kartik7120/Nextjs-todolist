@@ -79,7 +79,6 @@ export default function SingleList() {
     const { data, error, isMutating: loading, trigger: tri } = useSWRMutation<ListInterface>(`/api/lists/${query.id}`, fetchList);
     const { trigger: tri2, isMutating: mut } = useSWRMutation<ListInterface>(`/api/lists/${query.id}`, MarkList);
     useEffect(() => {
-        console.log(`value of isReady = ${isReady} and value of id = ${query.id}`)
         if (isReady) {
             setShouldFetch((oldstate) => {
                 tri();
