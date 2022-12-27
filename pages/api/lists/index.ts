@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import connectDB from "../../../lib/mongoose";
 import List from "../../../models/List";
+import Item from "../../../models/ListItem";
 
 interface CreateList {
     title: string,
@@ -44,7 +45,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const { id } = req.body;
 
             if (id === null || id === undefined) {
-                return res.status(400).json("Please provide the id of the list");
+                const lists = await List.deleteMany({}, {
+                    new: true
+                });
+
+                const item = await Item.deleteMany({}, {
+                    new: true
+                });
+
+                return res.status(200).json(lists);
             }
 
             const lists = await List.findByIdAndDelete(id, {
@@ -54,7 +63,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).json(lists);
 
         } catch (error) {
-           return res.status(500).json("Error occured while deleting the lists");
+            return res.status(500).json("Error occured while deleting the lists");
         }
     }
 }
