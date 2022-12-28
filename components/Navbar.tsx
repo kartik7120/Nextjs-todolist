@@ -13,20 +13,22 @@ import { useTheme as useNextTheme } from 'next-themes'
 import { FcTodoList } from "react-icons/fc";
 
 export default function Nav({ children }: { children?: React.ReactNode }) {
-    const { type, isDark } = useTheme();
-    const { setTheme } = useNextTheme();
+  const { type, isDark } = useTheme();
+  const { setTheme } = useNextTheme();
 
-    return <Navbar variant="floating" isBordered>
+  return <Navbar shouldHideOnScroll variant="floating" isBordered>
     <Navbar.Brand>
       <FcTodoList size={50} />
-      <Text h2 size="$5xl">TodoList</Text>
+      <Link href="/">
+        <Text h2 size="$5xl">TodoList</Text>
+      </Link>
     </Navbar.Brand>
-    <Navbar.Content enableCursorHighlight activeColor="secondary" variant="highlight-rounded">
+    <Navbar.Content hideIn="sm" enableCursorHighlight activeColor="secondary" variant="highlight-rounded">
       <Navbar.Link isActive href="/">Home</Navbar.Link>
       <Navbar.Link href="#Lists">Lists</Navbar.Link>
     </Navbar.Content>
     <Navbar.Content>
-      <Button color="gradient" onClick={() => {
+      <Button auto color="gradient" onClick={() => {
         if (isDark === true) {
           setTheme("light")
         }

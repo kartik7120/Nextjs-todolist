@@ -147,12 +147,12 @@ export default function SingleList() {
                             </Checkbox>
                             <div className={styles.wrapper3}>
                                 <Tooltip placement="left" color="error" content="Delete Todo Item">
-                                    <Button color="error" onClick={() => {
+                                    <Button auto color="error" onClick={() => {
                                         trigger({ id: query.id, itemId: item._id })
                                     }}>{isMutating ? <Loading /> : <BsTrash />}</Button>
                                 </Tooltip>
                                 <Tooltip placement="top" color="secondary" content="More Info on Todo">
-                                    <Button color="primary" onClick={handler}><AiOutlineInfoCircle /></Button>
+                                    <Button color="primary" auto onClick={handler}><AiOutlineInfoCircle /></Button>
                                 </Tooltip>
                             </div>
                         </div>

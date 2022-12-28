@@ -70,20 +70,20 @@ export default function ListHeader(props: Props) {
                 }} />
             </Modal.Body>
             <Modal.Footer>
-                <Button size="lg" onClick={() => {
+                <Button auto onClick={() => {
                     trigger({ id: props.id, title: todo, description: desc });
                 }} disabled={isMutating}>{isMutating ? <Loading /> : 'Create Todo'}</Button>
             </Modal.Footer>
         </Modal>
         <Navbar isBordered variant="floating">
             <Navbar.Brand>
-                <Text size="$3xl" h1>{props.title}</Text>
+                <Text h2>{props.title}</Text>
             </Navbar.Brand>
             <Navbar.Content>
-                <Button shadow color="warning" size="lg" onClick={() => handler()}><AiOutlinePlus /></Button>
+                <Button auto shadow color="warning" onClick={() => handler()}><AiOutlinePlus /></Button>
                 <Popover>
                     <Popover.Trigger>
-                        <Button color="default" ><SlOptions /></Button>
+                        <Button auto color="default" ><SlOptions /></Button>
                     </Popover.Trigger>
                     <Popover.Content>
                         <Button color="primary" onClick={() => props.setState("Completed")}>Sort by Completed</Button>
