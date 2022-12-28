@@ -6,7 +6,7 @@ import { ListInterface } from "../models/List";
 import styles from "../styles/bottom.module.css";
 
 interface NewListInterface extends ListInterface {
-    _id: number
+    _id: string
 }
 
 const fetchLists = async () => {
@@ -22,7 +22,9 @@ export default function BottomList() {
     });
 
     if (isLoading) {
-        return <Loading size="xl" />
+        return <div className={styles.wrapperLoading}>
+            <Loading size="xl" />
+        </div>
     }
 
     if (error) {

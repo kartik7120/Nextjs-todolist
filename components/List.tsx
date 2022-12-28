@@ -8,7 +8,7 @@ import React from "react";
 interface Props {
     header: string | undefined,
     body: string | undefined,
-    id: number
+    id: string
 }
 
 export default function ListCard(props: Props) {

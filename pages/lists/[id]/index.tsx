@@ -98,7 +98,9 @@ export default function SingleList() {
     };
 
     if (loading) {
-        return <Loading />
+        return <div className={styles.wrapperLoading}>
+            <Loading />
+        </div>
     }
 
 
