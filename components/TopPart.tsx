@@ -36,7 +36,7 @@ export default function TopPart() {
     async function createList() {
         if (list !== "") {
             try {
-                const query = await fetch(`http://localhost:3000/api/lists`, {
+                const query = await fetch(`/api/lists`, {
                     method: "POST",
                     body: JSON.stringify({
                         title: list,
